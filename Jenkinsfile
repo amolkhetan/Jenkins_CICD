@@ -41,6 +41,8 @@ pipeline {
         }
     }
 
+    /*
+
    # post {
    #     success {
    #         mail to: 'munisheak@gmail.com',
@@ -54,6 +56,8 @@ pipeline {
    #              body: "Oops! Build ${env.BUILD_NUMBER} failed. Please check Jenkins logs."
    #     }
    # }
+    
+    */
 
     post {
         success {
