@@ -41,16 +41,26 @@ pipeline {
         }
     }
 
+   # post {
+   #     success {
+   #         mail to: 'munisheak@gmail.com',
+   #              subject: "Build Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+   #              body: "Great! Build ${env.BUILD_NUMBER} succeeded."
+   #    
+   #     }
+   #     failure {
+   #         mail to: 'munisheak@gmail.com',
+   #              subject: "Build Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+   #              body: "Oops! Build ${env.BUILD_NUMBER} failed. Please check Jenkins logs."
+   #     }
+   # }
+
     post {
         success {
-            mail to: 'munisheak@gmail.com',
-                 subject: "Build Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Great! Build ${env.BUILD_NUMBER} succeeded."
+            echo "🎉 Build #${env.BUILD_NUMBER} succeeded for job '${env.JOB_NAME}'."
         }
         failure {
-            mail to: 'munisheak@gmail.com',
-                 subject: "Build Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Oops! Build ${env.BUILD_NUMBER} failed. Please check Jenkins logs."
+            echo "❌ Build #${env.BUILD_NUMBER} failed for job '${env.JOB_NAME}'."
         }
     }
 }
