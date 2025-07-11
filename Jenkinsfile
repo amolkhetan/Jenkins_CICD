@@ -31,23 +31,24 @@ pipeline {
         }
     }
     
-post {
-    success {
-        withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
-            sh """
-                curl -X POST -H 'Content-type: application/json' --data '{
-                  "text": " *Build SUCCESS* - Job: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]\\n ${env.BUILD_URL}"
-                }' $WEBHOOK_URL
-            """
+    post {
+        success {
+            withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
+                sh """
+                    curl -X POST -H 'Content-type: application/json' --data '{
+                      "text": " *Build SUCCESS* - Job: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]\\n ${env.BUILD_URL}"
+                    }' $WEBHOOK_URL
+                """
+            }
         }
-    }
-    failure {
-        withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
-            sh """
-                curl -X POST -H 'Content-type: application/json' --data '{
-                  "text": " *Build FAILED* - Job: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]\\n ${env.BUILD_URL}"
-                }' $WEBHOOK_URL
-            """
+        failure {
+            withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
+                sh """
+                    curl -X POST -H 'Content-type: application/json' --data '{
+                      "text": " *Build FAILED* - Job: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]\\n ${env.BUILD_URL}"
+                    }' $WEBHOOK_URL
+                """
+            }
         }
     }
 }
