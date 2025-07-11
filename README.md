@@ -1,9 +1,8 @@
-## Jenkins CI CD pipeline for flask application
+# Jenkins CI CD pipeline for flask application
 
-** Python web application repository
-** Jenkins Pipeline
 
-# 🚀 Flask CI/CD Pipeline with Jenkins
+
+## 🚀 Flask CI/CD Pipeline with Jenkins
 
 This repository contains a simple Python Flask web application integrated with a Jenkins CI/CD pipeline. The pipeline automates **build**, **test**, **deploy**, and **Slack notifications** on every GitHub push.
 
@@ -18,7 +17,6 @@ This repository contains a simple Python Flask web application integrated with a
 
 ---
 
----
 
 ## 🔁 Jenkins CI/CD Workflow
 
@@ -36,22 +34,27 @@ This repository contains a simple Python Flask web application integrated with a
 
 ---
 
-<img width="454" height="612" alt="Jenkins_Build_Test_Deploy" src="https://github.com/user-attachments/assets/43a0fed0-7b8a-4208-a79e-ae50768904f7" />
+<img width="400" height="570" alt="Jenkins_Build_Test_Deploy" src="https://github.com/user-attachments/assets/43a0fed0-7b8a-4208-a79e-ae50768904f7" />
+
+---
+
+<img width="800" height="610" alt="image" src="https://github.com/user-attachments/assets/64e54747-bb57-46cf-b92a-2fa55de565cc" />
 
 
-<img width="908" height="721" alt="image" src="https://github.com/user-attachments/assets/64e54747-bb57-46cf-b92a-2fa55de565cc" />
+---
+
+## Notification
+
+<img width="593" height="93" alt="Screenshot from 2025-07-11 14-04-23" src="https://github.com/user-attachments/assets/72e04dcf-c423-41e1-a7b7-381922bcf545" />
+
 
 ## 📂 Project Structure
 
-├── app.py    # Main Flask application
-├── requirements.txt     # Python dependencies
-├── Jenkinsfile   # CI/CD pipeline definition
-├── test_app.py    # Unit tests (pytest)
-└── README.md
+<img width="462" height="165" alt="image" src="https://github.com/user-attachments/assets/39147e84-75fd-424f-a139-5426bec27af4" />
 
 
 ## Polling Log
----
+```
 This page captures the polling log that triggered this build.
 
 Started on Jul 11, 2025, 7:44:24 AM
@@ -68,5 +71,10 @@ Found 1 remote heads on https://github.com/munisekar-py/Jenkins_CICD.git
 [poll] Latest remote head revision on refs/heads/main is: 7f6c43a90752d969fdabbe3d782ff33739969297
 Done. Took 0.38 sec
 Changes found
->
-----
+
+```
+---
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
