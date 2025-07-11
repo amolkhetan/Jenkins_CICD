@@ -67,7 +67,7 @@ pipeline {
             withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
                 sh '''
                     curl -X POST -H "Content-type: application/json" --data '{
-                      "text": "*Build SUCCESS* - Job: Flask_Deployment [#$BUILD_NUMBER]\\n $BUILD_URL"
+                      "text": " *Build SUCCESS* - Job: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]\\n ${env.BUILD_URL}"
                     }' "$WEBHOOK_URL"
                 '''
             }
@@ -76,7 +76,7 @@ pipeline {
             withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
                 sh '''
                     curl -X POST -H "Content-type: application/json" --data '{
-                      "text": " *Build FAILED* - Job: Flask_Deployment [#$BUILD_NUMBER]\\n $BUILD_URL"
+                      "text": " *Build FAILED* - Job: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]\\n ${env.BUILD_URL}"
                     }' "$WEBHOOK_URL"
                 '''
                 }
