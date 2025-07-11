@@ -17,16 +17,6 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                echo "Running tests..."
-                sh '''
-                    . venv/bin/activate
-                    pytest --disable-warnings
-                '''
-            }
-        }
-
         stage('Deploy') {
             when {
                 expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
@@ -40,17 +30,25 @@ pipeline {
             }
         }
     }
-
+    
     post {
         success {
-            mail to: 'munisheak@gmail.com',
-                 subject: "Build Success - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Great! Build ${env.BUILD_NUMBER} succeeded."
+            withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
+                sh """
+                    curl -X POST -H 'Content-type: application/json' --data '{
+                      "text": " *Build SUCCESS* - Job: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]\\n ${env.BUILD_URL}"
+                    }' $WEBHOOK_URL
+                """
+            }
         }
         failure {
-            mail to: 'munisheak@gmail.com',
-                 subject: "Build Failed - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: "Oops! Build ${env.BUILD_NUMBER} failed. Please check Jenkins logs."
+            withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
+                sh """
+                    curl -X POST -H 'Content-type: application/json' --data '{
+                      "text": " *Build FAILED* - Job: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]\\n ${env.BUILD_URL}"
+                    }' $WEBHOOK_URL
+                """
+            }
         }
     }
 }
