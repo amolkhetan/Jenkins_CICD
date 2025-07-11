@@ -36,6 +36,8 @@ pipeline {
             }
         }
     }
+
+    /*
     
     post {
         success {
@@ -58,3 +60,25 @@ pipeline {
         }
     }
 }
+*/
+    
+    post {
+        success {
+            withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
+                sh '''
+                    curl -X POST -H "Content-type: application/json" --data '{
+                      "text": "*Build SUCCESS* - Job: Flask_Deployment [#${BUILD_NUMBER}]\\n ${BUILD_URL}"
+                    }' "$WEBHOOK_URL"
+                '''
+            }
+        }
+        failure {
+            withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
+                sh '''
+                    curl -X POST -H "Content-type: application/json" --data '{
+                      "text": "*Build FAILED* - Job: Flask_Deployment [#${BUILD_NUMBER}]\\n ${BUILD_URL}"
+                    }' "$WEBHOOK_URL"
+                '''
+            }
+        }
+    }
