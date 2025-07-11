@@ -37,8 +37,7 @@ pipeline {
         }
     }
 
-    /*
-    
+
     post {
         success {
             withCredentials([string(credentialsId: 'SLACK_WEBHOOK', variable: 'WEBHOOK_URL')]) {
@@ -60,7 +59,8 @@ pipeline {
         }
     }
 }
-*/
+
+/*
     
     post {
         success {
@@ -83,3 +83,4 @@ pipeline {
             }
         }
 }
+*/
