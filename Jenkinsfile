@@ -79,6 +79,7 @@ pipeline {
                       "text": "*Build FAILED* - Job: Flask_Deployment [#${BUILD_NUMBER}]\\n ${BUILD_URL}"
                     }' "$WEBHOOK_URL"
                 '''
+                }
             }
         }
-    }
+}
