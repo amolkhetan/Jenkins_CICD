@@ -17,6 +17,12 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                sh './venv/bin/pytest tests/'
+            }
+        }
+
         stage('Deploy') {
             when {
                 expression { currentBuild.result == null || currentBuild.result == 'SUCCESS' }
