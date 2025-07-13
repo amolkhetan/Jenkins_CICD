@@ -1,9 +1,4 @@
-# Jenkins CI CD pipeline for flask application
-
-
-
-## 🚀 Flask CI/CD Pipeline with Jenkins
-
+# CIC Pipeline for flask application
 This repository contains a simple Python Flask web application integrated with a Jenkins CI/CD pipeline. The pipeline automates **build**, **test**, **deploy**, and **Slack notifications** on every GitHub push.
 
 ---
@@ -19,7 +14,7 @@ This repository contains a simple Python Flask web application integrated with a
 
 
 ## 🔁 Jenkins CI/CD Workflow
-
+Using Multi branch pipeline for this. Webhooks can also be using for code commit scanning.
 ### 🎯 Trigger
 - Automatically triggered when code is pushed to the `main` branch via GitHub Webhook.
 
@@ -27,54 +22,70 @@ This repository contains a simple Python Flask web application integrated with a
 
 | Stage   | Description                                  |
 |---------|----------------------------------------------|
+| Poll    | Scan Git Repo for commits                    |
 | Build   | Creates virtual environment, installs deps   |
 | Test    | Runs unit tests using pytest                 |
 | Deploy  | Starts Flask app if tests pass               |
 | Notify  | Sends status to Slack channel                |
 
 ---
+**1.	Setup:**
+   - Launch an EC2 machine
+     <img width="1912" height="974" alt="image" src="https://github.com/user-attachments/assets/f7ba71ec-5a31-4806-bd6a-d040bdd2e974" />
 
-<img width="400" height="570" alt="Jenkins_Build_Test_Deploy" src="https://github.com/user-attachments/assets/43a0fed0-7b8a-4208-a79e-ae50768904f7" />
+   - Run Below commands to install jenkins on newly launch machine.
 
----
+      sudo apt update
+     #Java to be installed for Jenkins as it is java based application
+     sudo apt install openjdk-17-jdk -y
+     wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+     sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+     sudo apt update
+     sudo apt install jenkins -y
+     sudo systemctl start jenkins
+     sudo systemctl enable Jenkins 
 
-<img width="800" height="610" alt="image" src="https://github.com/user-attachments/assets/64e54747-bb57-46cf-b92a-2fa55de565cc" />
+     sudo apt install python3-full python3-pip
+     python3 -m venv /opt/jenkins_venv
+     source /opt/jenkins_venv/bin/activate
+     pip install -r requirements.txt
+
+    <img width="1291" height="279" alt="image" src="https://github.com/user-attachments/assets/1f4ba731-09e8-4537-933b-4dfaf9f69288" />
+
+    <img width="1918" height="937" alt="image" src="https://github.com/user-attachments/assets/0f54b065-f6e4-4ea4-b0dc-3626583c2d36" />
+
+**Issues Faced: **
+  1. java 11 didnt worked  - Used java 17
+  2. python version not supported - used full version
+  3. After install url was not accessible using publicip on 8080 --> enabled port 8080 in security inbound rule
+
+<img width="1349" height="728" alt="image" src="https://github.com/user-attachments/assets/f4674878-31fb-4f1f-bdc7-44592bf33ad9" />
+<img width="1680" height="944" alt="image" src="https://github.com/user-attachments/assets/9fc5750d-efce-4d3c-a5f5-0582a5d1d688" />
+<img width="1919" height="599" alt="image" src="https://github.com/user-attachments/assets/f2b69c74-96ae-4213-ab5a-a867a08f284a" />
+
+**2. Source Code:**
+I forked my repo from one of my batchmate's git hub and there were no link given
+<img width="1036" height="334" alt="image" src="https://github.com/user-attachments/assets/b8969f01-1f13-4f45-9ab3-0b2816d18605" />
+
+**3. Jenkins Pipeline:**
+Jenkins file is present in repo
+
+<img width="1549" height="899" alt="image" src="https://github.com/user-attachments/assets/fa19dec2-2dd7-4d38-979f-556d7d4968d0" />
+
+**4. Notification**
+<img width="1843" height="397" alt="image" src="https://github.com/user-attachments/assets/9e0edbdc-6a56-4a71-8323-4018526c09fd" />
 
 
----
-
-## Notification
-
-<img width="593" height="93" alt="Screenshot from 2025-07-11 14-04-23" src="https://github.com/user-attachments/assets/72e04dcf-c423-41e1-a7b7-381922bcf545" />
 
 
-## 📂 Project Structure
-
+**5. 📂 Project Structure**
 <img width="462" height="165" alt="image" src="https://github.com/user-attachments/assets/39147e84-75fd-424f-a139-5426bec27af4" />
 
 
-## Polling Log
-```
-This page captures the polling log that triggered this build.
 
-Started on Jul 11, 2025, 7:44:24 AM
-Started by event from 140.82.115.12 ⇒ http://jenkins.munisekar.com:8080/github-webhook/ on Fri Jul 11 07:44:24 UTC 2025
-Using strategy: Default
-[poll] Last Built Revision: Revision b46fe2f4fc71bd696a5d36020dac05aaffc25ce5 (refs/remotes/origin/main)
-Selected Git installation does not exist. Using Default
-The recommended git tool is: NONE
-No credentials specified
- > git --version # timeout=10
- > git --version # 'git version 2.39.5'
- > git ls-remote -h -- https://github.com/munisekar-py/Jenkins_CICD.git # timeout=10
-Found 1 remote heads on https://github.com/munisekar-py/Jenkins_CICD.git
-[poll] Latest remote head revision on refs/heads/main is: 7f6c43a90752d969fdabbe3d782ff33739969297
-Done. Took 0.38 sec
-Changes found
+**6. Polling Log**
+
+<img width="1887" height="837" alt="image" src="https://github.com/user-attachments/assets/a01757ba-4d0f-4132-af77-25c063325be7" />
 
 ```
----
 
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
