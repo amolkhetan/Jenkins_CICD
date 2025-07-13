@@ -68,7 +68,10 @@ I forked my repo from one of my batchmate's git hub and there were no link given
 <img width="1036" height="334" alt="image" src="https://github.com/user-attachments/assets/b8969f01-1f13-4f45-9ab3-0b2816d18605" />
 
 **3. Jenkins Pipeline:**
-Jenkins file is present in repo
+Tried 2 ways, 1 pipeline project and multibranch project. Jenkins file is present in repo
+
+<img width="1913" height="580" alt="image" src="https://github.com/user-attachments/assets/84fc8eed-6135-407c-8518-4a8ff4ca77ae" />
+
 <img width="1120" height="444" alt="image" src="https://github.com/user-attachments/assets/f774ac4f-c596-478e-865d-773b68e20e04" />
 
 <img width="1549" height="899" alt="image" src="https://github.com/user-attachments/assets/fa19dec2-2dd7-4d38-979f-556d7d4968d0" />
