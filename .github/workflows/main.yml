@@ -1,0 +1,57 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, staging]
+  release:
+    types: [created]
+
+jobs:
+  install-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+  run-tests:
+    needs: install-dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Pytest
+        run: |
+          pip install pytest
+          pytest tests/
+
+  build:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build app
+        run: echo "Preparing for deployment"
+
+  deploy-staging:
+    if: github.ref == 'refs/heads/staging'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Staging
+        run: echo "Deploying to Staging"
+        env:
+          STAGING_API_KEY: ${{ secrets.STAGING_API_KEY }}
+
+  deploy-production:
+    if: github.event_name == 'release'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Production
+        run: echo "Deploying to Production"
+        env:
+          PROD_API_KEY: ${{ secrets.PROD_API_KEY }}
