@@ -69,6 +69,7 @@ I forked my repo from one of my batchmate's git hub and there were no link given
 
 **3. Jenkins Pipeline:**
 Jenkins file is present in repo
+<img width="1120" height="444" alt="image" src="https://github.com/user-attachments/assets/f774ac4f-c596-478e-865d-773b68e20e04" />
 
 <img width="1549" height="899" alt="image" src="https://github.com/user-attachments/assets/fa19dec2-2dd7-4d38-979f-556d7d4968d0" />
 
