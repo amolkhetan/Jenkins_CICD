@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    retur 'Hello from Flask! Amol is testing jenkins cicd....'
+    return 'Hello from Flask! Amol is testing jenkins cicd pipeline'
 
 @app.route('/ping')
 def ping():
