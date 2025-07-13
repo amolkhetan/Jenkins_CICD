@@ -14,7 +14,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.12
+          python-version: '3.12'
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
@@ -32,7 +32,7 @@ jobs:
         run: |
           pip install -r requirements.txt
       - name: Run Pytest
-          pytest ./test_app.py
+        run: pytest ./test_app.py
 
   build:
     needs: run-tests
