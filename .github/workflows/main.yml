@@ -27,7 +27,7 @@ jobs:
       - name: Run Pytest
         run: |
           pip install pytest
-          pytest tests/
+          pytest ./test_app.py
 
   build:
     needs: run-tests
